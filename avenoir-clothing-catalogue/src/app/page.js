@@ -1,12 +1,13 @@
-import Head from 'next/head';
+import GarmentSection from "@/components/GarmentSection";
+import UploadButton from "@/components/UploadButton";
+import UploadModal from "@/components/UploadModal";
 
 export default function Home() {
   return (
     <>
-    <Head>
-      <title>Create Next App</title>
-    </Head>
-    <div>Test</div>
+      <UploadButton />
+      <GarmentSection />
+      <UploadModal />
     </>
   );
 }

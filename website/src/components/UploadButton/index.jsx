@@ -1,5 +1,4 @@
 "use client";
-
 import uploadGarment from "@/modules/garmentsData";
 
 export default function UploadButton() {

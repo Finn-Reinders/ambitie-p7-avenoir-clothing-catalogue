@@ -1,4 +1,4 @@
-import Garment from "@/components/Garment";
+import Garment from "@/components/GarmentSection/Garment";
 import { garmentData } from "@/modules/garmentsData";
 import { AnimatePresence } from "framer-motion";
 
@@ -8,7 +8,10 @@ export default function GarmentSection() {
       {garmentData.map((garment, i) => {
         return (
           <AnimatePresence key={`Garment_${i}`}>
-            <Garment delay={.1 * i} garment={garment} />
+              <Garment
+                delay={0.1 * i}
+                garment={garment}
+              />
           </AnimatePresence>
         );
       })}

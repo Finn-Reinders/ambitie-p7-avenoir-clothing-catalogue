@@ -1,5 +1,3 @@
-import { div } from "three/src/nodes/math/OperatorNode";
-
 export default function UploadModal() {
     return (
         <div className='p-4 absolute flex-col left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[50vw] h-[50vh] bg-black text-white flex'>

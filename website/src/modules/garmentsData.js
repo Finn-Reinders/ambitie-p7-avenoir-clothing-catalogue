@@ -5,7 +5,7 @@ export const garment = {
   colour: "",
   label: [],
   image: {
-    src: "/placeholder-images/placeholder-garment.webp",
+    src: "/placeholder-images/placeholder-pants-garment.webp",
     alt: "Image",
   },
 };

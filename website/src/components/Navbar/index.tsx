@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
 import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Route {
   url: string;
@@ -15,29 +15,33 @@ export default function Navbar() {
       name: "Home",
     },
     {
-      url: "/login",
-      name: "Login",
-    },
-    {
       url: "/garment",
       name: "Garments",
+    },
+    {
+      url: "/profile",
+      name: "Profile",
     },
   ];
 
   const router = useTransitionRouter();
+  const pathname = usePathname();
   return (
-    <nav className="">
+    <nav className="bg-lime-500">
       <ul className="flex gap-4">
         {routes.map((route, i) => {
+          const isActive = pathname === route.url;
           return (
             <li key={`route${i}`}>
               <Link
                 href={route.url}
                 onClick={(e) => {
-                  e.preventDefault();
-                  router.push(route.url, {
-                    onTransitionReady: pageAnimation,
-                  });
+                  if (!isActive) {
+                    e.preventDefault();
+                    router.push(route.url, {
+                      onTransitionReady: pageAnimation,
+                    });
+                  }
                 }}
               >
                 {route.name}

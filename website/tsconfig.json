@@ -33,5 +33,9 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "paths": {
+    "@/*": ["./src/*"]
+  },
+  "ignoreDeprecations": "6.0"
 }

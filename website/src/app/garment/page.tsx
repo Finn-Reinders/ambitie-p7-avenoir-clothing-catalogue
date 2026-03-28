@@ -1,9 +1,9 @@
-import React from "react";
-import GarmentSection from '../../components/GarmentSection/index';
-import Navbar from '../../components/Navbar/index';
-import Page from '../../components/Page/index';
+import GarmentSection from "../../components/GarmentSection/index";
+import Navbar from "../../components/Navbar/index";
+import Page from "../../components/Page/index";
 
-export default function garmentPage() {
+export default async function garmentPage() {
+
   return (
     <Page>
       <Navbar />

@@ -1,10 +1,10 @@
 "use client";
 import React, { ReactNode } from "react";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-import PageTransition from "../components/Page";
-import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ViewTransitions } from "next-view-transitions";
+import { Session } from "inspector/promises";
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <title>Home</title>
         </head>
         <body>
-          {children}
+          <SessionProvider>{children}</SessionProvider>
         </body>
       </html>
     </ViewTransitions>

@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Page from "@/components/Page";
 
-export default function Home() {
+export default function garment() {
   return (
     <Page>
       <Navbar />
-      <div className="h-screen w-screen">Home</div>
+      <div className='w-screen h-screen'>Garment</div>
     </Page>
   );
 }

@@ -21,7 +21,7 @@ export default function Garment({ delay, garment }) {
       className="aspect-square border-2 border-gray-700 rounded-2xl w-60 flex p-4 justify-center items-center bg-black"
     >
       <div className="w-full h-full">
-        <Link href="/login">
+        <Link href="/garment/garmentos">
           <Image
             width={200}
             height={200}

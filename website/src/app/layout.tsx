@@ -1,11 +1,16 @@
 "use client";
+import React, { ReactNode } from "react";
 import "./globals.css";
-import PageTransition from "@/components/Page";
+import PageTransition from "../components/Page";
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ViewTransitions } from "next-view-transitions";
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname();
   return (
     <ViewTransitions>
@@ -14,7 +19,7 @@ export default function RootLayout({ children }) {
           <title>Home</title>
         </head>
         <body>
-            {children}
+          {children}
         </body>
       </html>
     </ViewTransitions>

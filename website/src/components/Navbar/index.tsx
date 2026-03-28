@@ -3,8 +3,13 @@ import React from "react";
 import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
 
+interface Route {
+  url: string;
+  name: string;
+}
+
 export default function Navbar() {
-  const routes = [
+  const routes: Route[] = [
     {
       url: "/",
       name: "Home",
@@ -45,7 +50,7 @@ export default function Navbar() {
   );
 }
 
-const pageAnimation = () => {
+const pageAnimation = (): void => {
   document.documentElement.animate(
     [
       {
@@ -64,7 +69,7 @@ const pageAnimation = () => {
       easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-old(root)",
-    },
+    } as unknown as KeyframeAnimationOptions,
   );
 
   document.documentElement.animate(
@@ -81,6 +86,6 @@ const pageAnimation = () => {
       easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-new(root)",
-    },
+    } as unknown as KeyframeAnimationOptions,
   );
 };

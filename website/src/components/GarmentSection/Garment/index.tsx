@@ -1,18 +1,24 @@
 "use client";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { anim } from "@/modules/anim";
+import { anim } from "../../../modules/anim";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import type { Garment as GarmentType } from "../../../modules/garmentsData";
 
-export default function Garment({ delay, garment }) {
+interface GarmentProps {
+  delay: number;
+  garment: GarmentType;
+}
+
+export default function Garment({ delay, garment }: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
     exit: { opacity: 0, y: -20 },
   };
 
-  const [modalOpened, setModalOpened] = useState(false);
+  const [modalOpened, setModalOpened] = useState<boolean>(false);
 
   return (
     <motion.div

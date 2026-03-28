@@ -1,5 +1,6 @@
-import Garment from "@/components/GarmentSection/Garment";
-import { garmentData } from "@/modules/garmentsData";
+import React from "react";
+import Garment from "./Garment/index";
+import { garmentData } from "../../modules/garmentsData";
 import { AnimatePresence } from "framer-motion";
 
 export default function GarmentSection() {

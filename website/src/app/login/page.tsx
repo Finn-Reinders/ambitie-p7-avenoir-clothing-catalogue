@@ -1,6 +1,6 @@
-import Navbar from "@/components/Navbar";
-import Page from "@/components/Page";
-import PageTransition from "@/components/Page";
+import React from "react";
+import Navbar from "../../components/Navbar/index";
+import Page from "../../components/Page/index";
 import Link from 'next/link';
 
 export const metadata = {

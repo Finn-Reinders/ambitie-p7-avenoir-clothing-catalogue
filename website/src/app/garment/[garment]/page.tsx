@@ -1,5 +1,6 @@
-import Navbar from "@/components/Navbar";
-import Page from "@/components/Page";
+import React from "react";
+import Navbar from "../../../components/Navbar/index";
+import Page from "../../../components/Page/index";
 
 export default function garment() {
   return (

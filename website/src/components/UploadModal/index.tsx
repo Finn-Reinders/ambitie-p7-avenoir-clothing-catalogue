@@ -1,8 +1,15 @@
+import React, { FormEvent } from 'react';
+
 export default function UploadModal() {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // Handle form submission
+    };
+
     return (
         <div className='p-4 absolute flex-col left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[50vw] h-[50vh] bg-black text-white flex'>
             <h1>Uploading Garment</h1>
-            <form action="" className='flex flex-col w-[75%]'>
+            <form onSubmit={handleSubmit} className='flex flex-col w-[75%]'>
                 <input type="text" placeholder='Title' />
                 <input type="text" placeholder="Description" />
                 <input className='w-fit' type='submit'/>

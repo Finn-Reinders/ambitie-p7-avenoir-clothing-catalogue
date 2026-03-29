@@ -2,8 +2,7 @@ import GarmentSection from "../../components/GarmentSection/index";
 import Navbar from "../../components/Navbar/index";
 import Page from "../../components/Page/index";
 
-export default async function garmentPage() {
-
+export default function garmentPage() {
   return (
     <Page>
       <Navbar />

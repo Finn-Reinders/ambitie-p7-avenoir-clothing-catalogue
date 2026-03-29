@@ -1,17 +1,13 @@
-"use client";
 import React, { ReactNode } from "react";
-import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-import { usePathname } from "next/navigation";
 import { ViewTransitions } from "next-view-transitions";
-import { Session } from "inspector/promises";
+import SessionWrapper from "./SessionWrapper";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const pathname = usePathname();
   return (
     <ViewTransitions>
       <html lang="en">
@@ -19,7 +15,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <title>Home</title>
         </head>
         <body>
-          <SessionProvider>{children}</SessionProvider>
+          <SessionWrapper>{children}</SessionWrapper>
         </body>
       </html>
     </ViewTransitions>

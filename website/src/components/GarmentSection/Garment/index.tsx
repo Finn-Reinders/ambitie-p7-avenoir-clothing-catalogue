@@ -27,7 +27,7 @@ export default function Garment({ delay, garment }: GarmentProps) {
       className="aspect-square border-2 border-gray-700 rounded-2xl w-60 flex p-4 justify-center items-center bg-black"
     >
       <div className="w-full h-full">
-        <Link href="/garment/garmentos">
+        <Link href={`garment/${garment.name}`}>
           <Image
             width={200}
             height={200}

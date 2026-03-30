@@ -29,6 +29,5 @@ export const garmentData: Garment[] = [
 ];
 
 export default function uploadGarment(): void {
-    console.log("function gets called");
     garmentData.push(garment);
 }

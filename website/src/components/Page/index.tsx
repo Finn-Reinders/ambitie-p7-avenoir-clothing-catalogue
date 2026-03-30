@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Navbar from '../Navbar';
 
 interface PageProps {
   children: ReactNode;
@@ -7,6 +8,7 @@ interface PageProps {
 export default function Page({ children }: PageProps) {
   return (
     <div className='bg-white'>
+      <Navbar />
       {children}
     </div>
   );

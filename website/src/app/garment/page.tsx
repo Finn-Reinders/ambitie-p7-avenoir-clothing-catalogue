@@ -5,7 +5,6 @@ import Page from "../../components/Page/index";
 export default function garmentPage() {
   return (
     <Page>
-      <Navbar />
       <div className="h-screen w-screen">
         <GarmentSection />
       </div>

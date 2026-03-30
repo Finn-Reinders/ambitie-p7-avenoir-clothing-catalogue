@@ -11,7 +11,6 @@ export default async function page() {
 
   return (
     <Page>
-      <Navbar />
       <div className="w-screen h-screen">
         {!session ? (
           <Login />

@@ -62,19 +62,30 @@ const pageAnimation = (): void => {
   document.documentElement.animate(
     [
       {
-        opacity: 1,
         scale: 1,
-        transform: "translateY(0)",
+        offset: 0,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+        transform: 'translate(0)',
+        opacity: 1,
       },
       {
-        opacity: 0.5,
-        scale: 0.9,
-        transform: "translateY(-100px)",
+        scale: 0.8,
+        transform: 'translate(0)',
+        offset: 0.5,
+        opacity: 1,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)"
+      },
+      {
+        scale: 0.8,
+        transform : 'translate(100vw, 100vh)',
+        easing: 'ease-out',
+        opacity: 0,
+        offset: 1
       },
     ],
     {
-      duration: 1000,
-      easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+      duration: 2000,
+      // easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-old(root)",
     } as unknown as KeyframeAnimationOptions,
@@ -83,15 +94,29 @@ const pageAnimation = (): void => {
   document.documentElement.animate(
     [
       {
-        transform: "translateY(100%)",
+        scale: 0.8,
+        transform: 'translate(-100vw, -100vh)',
+        opacity: 0,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+        offset: 0,
       },
       {
-        transform: "translateY(0)",
+        scale: 0.8,
+        transform: 'translate(0)',
+        opacity: 1,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+        offset: 0.5,
+      },
+      {
+        scale: 1,
+        transform: 'translate(0)',
+        opacity: 1,
+        offset: 1,
       },
     ],
     {
-      duration: 1000,
-      easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+      duration: 2000,
+      // easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-new(root)",
     } as unknown as KeyframeAnimationOptions,

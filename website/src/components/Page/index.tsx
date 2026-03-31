@@ -7,7 +7,7 @@ interface PageProps {
 
 export default function Page({ children }: PageProps) {
   return (
-    <div className='bg-white'>
+    <div className='bg-[#171717] pt-5'>
       <Navbar />
       {children}
     </div>

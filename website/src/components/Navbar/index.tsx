@@ -22,12 +22,16 @@ export default function Navbar() {
       url: "/profile",
       name: "Profile",
     },
+    {
+      url: "/board",
+      name: "My Board",
+    },
   ];
 
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
-    <nav className="bg-lime-500">
+    <nav className="bg-lime-500 fixed top-0">
       <ul className="flex gap-4">
         {routes.map((route, i) => {
           const isActive = pathname === route.url;

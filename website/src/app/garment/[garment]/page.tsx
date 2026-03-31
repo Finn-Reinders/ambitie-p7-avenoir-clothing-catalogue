@@ -1,13 +1,21 @@
-"use client"
 import Page from "../../../components/Page/index";
-import { useParams } from "next/navigation";
-import { garmentData } from '../../../modules/garmentsData';
+import { loadGarments } from '../../../modules/garmentsData';
 
-export default function garment() {
-  const { garment } = useParams();
+interface PageProps {
+  params: Promise<{ garment: string }>;
+}
+
+export default async function garment({ params }: PageProps) {
+  const { garment } = await params;
+  
+  const garments = await loadGarments();
+  const pageGarment = garments.find((garm) => garm._id === garment);
+
   return (
     <Page>
-      <div className='w-screen h-screen'>{garment}</div>
+      <div className='w-screen h-screen'>
+        {pageGarment?.description}
+      </div>
     </Page>
   );
 }

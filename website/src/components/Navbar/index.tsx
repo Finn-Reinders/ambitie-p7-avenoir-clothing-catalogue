@@ -59,6 +59,9 @@ export default function Navbar() {
 }
 
 const pageAnimation = (): void => {
+  let randomNumber: number = Math.random() < 0.5 ? Math.random() * -112 : Math.random() * 112;
+  
+  console.log(randomNumber);
   document.documentElement.animate(
     [
       {
@@ -77,9 +80,9 @@ const pageAnimation = (): void => {
       },
       {
         scale: 0.8,
-        transform : 'translate(100vw, 100vh)',
+        transform : `translate(112vw, ${randomNumber}vh)`,
         easing: 'ease-out',
-        opacity: 0,
+        opacity: 1,
         offset: 1
       },
     ],
@@ -95,17 +98,23 @@ const pageAnimation = (): void => {
     [
       {
         scale: 0.8,
-        transform: 'translate(-100vw, -100vh)',
-        opacity: 0,
-        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+        transform: `translate(-112vw, ${randomNumber}vh)`,
+        opacity: 1,
         offset: 0,
+      },
+      {
+        scale: 0.8,
+        transform: `translate(-112vw, ${randomNumber}vh)`,
+        opacity: 1,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+        offset: 0.33,
       },
       {
         scale: 0.8,
         transform: 'translate(0)',
         opacity: 1,
         easing: "cubic-bezier(0.76, 0, 0.24, 1)",
-        offset: 0.5,
+        offset: 0.66,
       },
       {
         scale: 1,
@@ -115,7 +124,7 @@ const pageAnimation = (): void => {
       },
     ],
     {
-      duration: 2000,
+      duration: 3000,
       // easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-new(root)",

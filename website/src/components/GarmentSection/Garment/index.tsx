@@ -6,14 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Garment as GarmentType } from "../../../modules/garmentsData";
 import "./index.css";
-import { garmentAnimation } from "./anim";
 
 interface GarmentProps {
   delay: number;
   garment: GarmentType;
+  garmentIndex: number;
 }
 
-export default function Garment({ delay, garment }: GarmentProps) {
+export default function Garment({ delay, garment, garmentIndex }: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
@@ -89,10 +89,10 @@ export default function Garment({ delay, garment }: GarmentProps) {
 
   const [garmentHovered, setGarmentHovered] = useState(false);
   return (
-    <Link className="w-fit h-fit" href={`garment/${garment._id}`}>
+    <Link className="w-fit h-fit" href={`garment/${garment._id}`} tabIndex={garmentIndex + 3}>
       <motion.div
         {...anim(garmentEnter)}
-        className="bg-white w-full flex h-fit relative rounded-md"
+        className="bg-white w-full flex h-fit relative"
         onMouseEnter={() => {
           setGarmentHovered(true);
         }}

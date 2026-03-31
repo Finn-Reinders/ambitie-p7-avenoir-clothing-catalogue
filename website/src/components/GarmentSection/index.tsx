@@ -29,19 +29,19 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!masonry) {
-    return (
-      <main className="flex flex-wrap gap-4">
-        {garments.map((garment, i) => {
-          return (
-            <AnimatePresence key={`Garment_${i}`}>
-              <Garment delay={0.1 * i} garment={garment} />
-            </AnimatePresence>
-          );
-        })}
-      </main>
-    );
-  }
+  // if (!masonry) {
+  //   return (
+  //     <main className="flex flex-wrap gap-4">
+  //       {garments.map((garment, i) => {
+  //         return (
+  //           <AnimatePresence key={`Garment_${i}`}>
+  //             <Garment delay={0.1 * i} garment={garment} />
+  //           </AnimatePresence>
+  //         );
+  //       })}
+  //     </main>
+  //   );
+  // }
 
   return (
     <main className="flex justify-center w-full gap-1.5">
@@ -58,7 +58,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
                   key={garment._id}
                 >
                   {garmentIndex % columns === columnIndex && (
-                    <Garment garment={garment} delay={0.1 * garmentIndex} />
+                    <Garment garmentIndex={garmentIndex} garment={garment} delay={0.1 * garmentIndex} />
                   )}
                 </AnimatePresence>
               );

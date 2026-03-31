@@ -59,36 +59,41 @@ export default function Navbar() {
 }
 
 const pageAnimation = (): void => {
-  let randomNumber: number = Math.random() < 0.5 ? Math.random() * -112 : Math.random() * 112;
-  
-  console.log(randomNumber);
+  let randomNumber: number =
+    Math.random() < 0.5 ? Math.random() * -112 : Math.random() * 112;
+  let randomString: string = Math.random() < 0.5 ? "x" : "y";
+  let locationX = randomString === "x" ? `${randomNumber}vw` : "112vw";
+  let locationY = randomString === "y" ? `${randomNumber}vh` : "112vh";
+  let locationXNeg = randomString === "x" ? `${-randomNumber}vw` : "-112vw";
+  let locationYNeg = randomString === "y" ? `${-randomNumber}vh` : "-112vh";
+
+  console.log(randomString);
   document.documentElement.animate(
     [
       {
         scale: 1,
         offset: 0,
         easing: "cubic-bezier(0.76, 0, 0.24, 1)",
-        transform: 'translate(0)',
+        transform: "translate(0)",
         opacity: 1,
       },
       {
-        scale: 0.8,
-        transform: 'translate(0)',
+        scale: 0.85,
+        transform: "translate(0)",
         offset: 0.5,
         opacity: 1,
-        easing: "cubic-bezier(0.76, 0, 0.24, 1)"
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       },
       {
-        scale: 0.8,
-        transform : `translate(112vw, ${randomNumber}vh)`,
-        easing: 'ease-out',
+        scale: 0.85,
+        transform: `translate(${locationX}, ${locationY})`,
+        easing: "ease-out",
         opacity: 1,
-        offset: 1
+        offset: 1,
       },
     ],
     {
       duration: 2000,
-      // easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-old(root)",
     } as unknown as KeyframeAnimationOptions,
@@ -97,35 +102,34 @@ const pageAnimation = (): void => {
   document.documentElement.animate(
     [
       {
-        scale: 0.8,
-        transform: `translate(-112vw, ${randomNumber}vh)`,
+        scale: 0.85,
+        transform: `translate(${locationXNeg}, ${locationYNeg})`,
         opacity: 1,
         offset: 0,
       },
       {
-        scale: 0.8,
-        transform: `translate(-112vw, ${randomNumber}vh)`,
+        scale: 0.85,
+        transform: `translate(${locationXNeg}, ${locationYNeg})`,
         opacity: 1,
         easing: "cubic-bezier(0.76, 0, 0.24, 1)",
         offset: 0.33,
       },
       {
-        scale: 0.8,
-        transform: 'translate(0)',
+        scale: 0.85,
+        transform: "translate(0)",
         opacity: 1,
         easing: "cubic-bezier(0.76, 0, 0.24, 1)",
         offset: 0.66,
       },
       {
         scale: 1,
-        transform: 'translate(0)',
+        transform: "translate(0)",
         opacity: 1,
         offset: 1,
       },
     ],
     {
       duration: 3000,
-      // easing: "cubic-bezier(0.76, 0, 0.24, 1)",
       fill: "forwards",
       pseudoElement: "::view-transition-new(root)",
     } as unknown as KeyframeAnimationOptions,

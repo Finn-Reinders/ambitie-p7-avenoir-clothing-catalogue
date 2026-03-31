@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  transform-origin: center;
+}
+
 body {
     margin: 0;
     padding: 0;

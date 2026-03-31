@@ -8,7 +8,7 @@ export default function board() {
   return (
     <Page>
       <div className="w-screen h-screen">
-        <div ref={screen} className='bg-sky-500 w-[50%] h-[90%]'>
+        <div ref={screen} className='w-[50%] h-[90%]'>
 
         <motion.div dragConstraints={screen} dragElastic={true} drag dragMomentum={true} className='w-40 h-40'>
           <img

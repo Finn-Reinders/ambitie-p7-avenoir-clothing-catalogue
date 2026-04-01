@@ -58,7 +58,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
                   key={garment._id}
                 >
                   {garmentIndex % columns === columnIndex && (
-                    <Garment garmentIndex={garmentIndex} garment={garment} delay={0.1 * garmentIndex} />
+                    <Garment garmentIndex={garmentIndex} garment={garment} delay={0.1 * (garmentIndex)} />
                   )}
                 </AnimatePresence>
               );

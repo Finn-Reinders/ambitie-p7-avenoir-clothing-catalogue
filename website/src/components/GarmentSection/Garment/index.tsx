@@ -21,7 +21,7 @@ export default function Garment({
 }: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
-    enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
+    enter: { opacity: 1, y: 0, transition: { duration: 1, delay }},
     exit: { opacity: 0, y: -20 },
   };
 
@@ -97,17 +97,16 @@ export default function Garment({
   const [saved, setSaved] = useState(false);
   const router = useTransitionRouter();
 
-  const handleSave = (posX, posY) => {};
   return (
     <a
       className="w-fit h-fit"
-      // href={`garment/${garment._id}`}
+      href={`garment/${garment._id}`}
       onClick={(e) => {
         e.preventDefault();
         addEventListener("dblclick", (e) => {
-          setSaved(true);
           clearInterval(interval);
-          handleSave(e.clientX, e.clientY);
+          setSaved(!saved);
+          setGarmentFocused(false);
         });
         const interval = setInterval(() => {
           router.push(`garment/${garment._id}`);
@@ -141,8 +140,10 @@ export default function Garment({
             >
               {saved && (
                 <motion.div
+                  onMouseMove={(e) => {const posX = e.clientX; const posY = e.clientY}}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-red-500 w-10 h-10"
                 ></motion.div>
               )}

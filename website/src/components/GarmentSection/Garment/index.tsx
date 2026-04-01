@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Garment as GarmentType } from "../../../modules/garmentsData";
 import "./index.css";
+import { useTransitionRouter } from "next-view-transitions";
 
 interface GarmentProps {
   delay: number;
@@ -13,7 +14,11 @@ interface GarmentProps {
   garmentIndex: number;
 }
 
-export default function Garment({ delay, garment, garmentIndex }: GarmentProps) {
+export default function Garment({
+  delay,
+  garment,
+  garmentIndex,
+}: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
@@ -88,8 +93,36 @@ export default function Garment({ delay, garment, garmentIndex }: GarmentProps) 
   }
 
   const [garmentHovered, setGarmentHovered] = useState(false);
+  const [garmentFocused, setGarmentFocused] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const router = useTransitionRouter();
+
+  const handleSave = (posX, posY) => {};
   return (
-    <Link className="w-fit h-fit" href={`garment/${garment._id}`} tabIndex={garmentIndex + 3}>
+    <a
+      className="w-fit h-fit"
+      // href={`garment/${garment._id}`}
+      onClick={(e) => {
+        e.preventDefault();
+        addEventListener("dblclick", (e) => {
+          setSaved(true);
+          clearInterval(interval);
+          handleSave(e.clientX, e.clientY);
+        });
+        const interval = setInterval(() => {
+          router.push(`garment/${garment._id}`);
+          clearInterval(interval);
+        }, 250);
+      }}
+      style={garmentFocused ? { outline: "1px", outlineColor: "red" } : {}}
+      tabIndex={garmentIndex + 3}
+      onFocus={() => {
+        setGarmentFocused(true);
+      }}
+      onBlur={() => {
+        setGarmentFocused(false);
+      }}
+    >
       <motion.div
         {...anim(garmentEnter)}
         className="bg-white w-full flex h-fit relative"
@@ -101,11 +134,28 @@ export default function Garment({ delay, garment, garmentIndex }: GarmentProps) 
         }}
       >
         <AnimatePresence mode="wait">
-          {garmentHovered && (
+          {(garmentFocused || garmentHovered) && (
             <motion.div
               {...anim(garmentHover)}
               className="w-full h-full absolute left-0 top-0 flex items-end p-2"
-            ><motion.h3 initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} exit={{y: -20, opacity: 0}} transition={{delay: .1, duration: 0.2}}  className='text-white text-2xl'>{garment.name}</motion.h3></motion.div>
+            >
+              {saved && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-red-500 w-10 h-10"
+                ></motion.div>
+              )}
+              <motion.h3
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ delay: 0.1, duration: 0.2 }}
+                className="text-white text-2xl"
+              >
+                {garment.name}
+              </motion.h3>
+            </motion.div>
           )}
         </AnimatePresence>
         <Image
@@ -116,6 +166,6 @@ export default function Garment({ delay, garment, garmentIndex }: GarmentProps) 
           height={200}
         />
       </motion.div>
-    </Link>
+    </a>
   );
 }

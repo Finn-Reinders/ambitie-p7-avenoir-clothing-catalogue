@@ -13,6 +13,7 @@ export default async function garment({ params }: PageProps) {
 
   return (
     <Page>
+      <img src={pageGarment.image.src} key={pageGarment._id} alt="" />
       <div className='w-screen h-screen'>
         {pageGarment?.description}
       </div>

@@ -168,6 +168,7 @@ export default function Garment({
           className="w-full"
           src={garment.image.src}
           alt={garment.image.alt}
+          loading='lazy'
           width={200}
           height={200}
         />

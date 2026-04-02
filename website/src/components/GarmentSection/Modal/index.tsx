@@ -8,7 +8,8 @@ const MODAL_STYLES: React.CSSProperties = {
     top: '0',
     left: '0',
     height: '100vh',
-    padding: '400px',
+    // padding: '0px',
+    width: '50vw',
     zIndex: 1000,
     backgroundColor: '#C9CCD1',    
 };

@@ -48,7 +48,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
   return (
     <motion.main 
       className="flex justify-center w-full gap-1.5"
-      animate={{ x: modalOpened ? "40vw" : 0 }}      
+      animate={{ x: modalOpened ? "50vw" : 0 }}      
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       >
       {[...Array(columns)].map((_, columnIndex) => {

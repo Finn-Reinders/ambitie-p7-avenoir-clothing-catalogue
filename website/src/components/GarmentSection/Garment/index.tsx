@@ -7,17 +7,22 @@ import Link from "next/link";
 import type { Garment as GarmentType } from "../../../modules/garmentsData";
 import "./index.css";
 import { useTransitionRouter } from "next-view-transitions";
+import Modal from "../../../components/modal";
 
 interface GarmentProps {
   delay: number;
   garment: GarmentType;
   garmentIndex: number;
+  modalOpened: boolean;
+  setModalOpened: (value: boolean) => void;
 }
 
 export default function Garment({
   delay,
   garment,
   garmentIndex,
+  modalOpened,
+  setModalOpened,
 }: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
@@ -37,13 +42,12 @@ export default function Garment({
     },
   };
 
-  const [modalOpened, setModalOpened] = useState<boolean>(false);
-
   const [masonry, setMasonry] = useState(true);
   const [randomHeight, setRandomHeight] = useState<string>("");
 
   useEffect(() => {
     setRandomHeight(Math.random() * 200 + 300 + "px");
+
   }, []);
 
   if (!masonry) {
@@ -98,7 +102,7 @@ export default function Garment({
   const router = useTransitionRouter();
 
   return (
-    <a
+    <a // double and single click
       className="w-fit h-fit"
       href={`garment/${garment._id}`}
       onClick={(e) => {
@@ -109,7 +113,8 @@ export default function Garment({
           setGarmentFocused(false);
         });
         const interval = setInterval(() => {
-          router.push(`garment/${garment._id}`);
+          // router.push(`garment/${garment._id}`);
+          setModalOpened(true);
           clearInterval(interval);
         }, 250);
       }}

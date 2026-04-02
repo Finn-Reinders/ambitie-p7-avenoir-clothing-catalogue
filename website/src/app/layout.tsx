@@ -16,6 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </head>
         <body>
           <SessionWrapper>{children}</SessionWrapper>
+          <div id="portal"></div>
         </body>
       </html>
     </ViewTransitions>

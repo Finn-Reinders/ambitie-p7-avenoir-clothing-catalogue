@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import Garment from "./Garment/index";
 import { Garment as GarmentType } from "../../modules/garmentsData";
 import { AnimatePresence, easeIn, motion } from "framer-motion";
-import Modal from "../modal";
+import Modal from "./Modal";
+import ModalContent from "./Modal/ModalContent";
 interface GarmentSectionProps {
   garments?: GarmentType[];
 }
@@ -57,7 +58,9 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
           key={`column-${columnIndex}`}
           className="flex flex-col w-75 gap-1.5"
           >
-          <Modal open={modalOpened} onClose={() => setModalOpened(false)} />
+          <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
+            <ModalContent />
+          </Modal>
             {garments.map((garment, garmentIndex) => {
               return (
                 <AnimatePresence

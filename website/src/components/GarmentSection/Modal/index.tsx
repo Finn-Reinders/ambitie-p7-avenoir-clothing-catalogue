@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // import './Modal.css'
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, cubicBezier } from "framer-motion"
 
 const MODAL_STYLES: React.CSSProperties = {
     position: 'fixed',
@@ -19,11 +19,11 @@ const swipeIn = {
         opacity: 0,
     },
     visible: {
-        x: "-1vw",
+        x: "0",
         opacity: 1,
         transition: {
             duration: 0.8,
-            ease: [0.76, 0, 0.24, 1]
+            ease: cubicBezier(0.76, 0, 0.24, 1)
         }
     },
     exit: {

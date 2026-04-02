@@ -9,13 +9,13 @@ export default async function garment({ params }: PageProps) {
   const { garment } = await params;
   
   const garments = await loadGarments();
-  const pageGarment = garments.find((garm) => garm._id === garment);
+  const modalGarment = garments.find((garm) => garm._id === garment);
 
   return (
     <Page>
-      <img src={pageGarment.image.src} key={pageGarment._id} alt="" />
+      {/* <img src={pageGarment.image.src} key={pageGarment._id} alt="" /> */}
       <div className='w-screen h-screen'>
-        {pageGarment?.description}
+        {/* {pageGarment?.description} */}
       </div>
     </Page>
   );

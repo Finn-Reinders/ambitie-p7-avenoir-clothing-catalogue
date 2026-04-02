@@ -7,7 +7,7 @@ import Link from "next/link";
 import type { Garment as GarmentType } from "../../../modules/garmentsData";
 import "./index.css";
 import { useTransitionRouter } from "next-view-transitions";
-import Modal from "../../../components/modal";
+import Modal from "../Modal";
 
 interface GarmentProps {
   delay: number;

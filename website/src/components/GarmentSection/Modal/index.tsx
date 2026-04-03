@@ -30,6 +30,10 @@ const swipeIn = {
     exit: {
         x:'-50vw',
         opacity: 0,
+        transition: {
+            duration: 0.7,
+            ease: cubicBezier(0.76, 0, 0.24, 1)
+        }
     },
 }
 
@@ -94,6 +98,7 @@ export default function Modal({ open, children, onClose }: { open: boolean; chil
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                    
                 >
                     <button style={CLOSE_BUTTON_STYLES} onClick={onClose}>Close Modal</button>
                 {children}

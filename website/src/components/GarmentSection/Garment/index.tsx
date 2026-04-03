@@ -14,8 +14,11 @@ interface GarmentProps {
   garmentIndex?: number;
   modalOpened?: boolean;
   garmentActive: boolean;
+  modalGarment?: GarmentType;
   setModalGarment?: (value: GarmentType) => void;
   setModalOpened?: (value: boolean) => void;
+  setModalGarmentIndex?: (value: number) => void;
+  setGarmentHeight?: (value: number) => void;
 }
 
 export default function Garment({
@@ -24,13 +27,16 @@ export default function Garment({
   garmentIndex,
   modalOpened,
   setModalOpened,
+  modalGarment,
   setModalGarment,
   garmentActive,
+  setModalGarmentIndex,
+  setGarmentHeight,
 }: GarmentProps) {
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
-    enter: { opacity: 1, y: 0, transition: { duration: 1, delay }},
-    exit: { opacity: 0, y: -20 },
+    enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
+    // exit: { opacity: 0, y: -20 },
   };
 
   const garmentHover = {
@@ -45,12 +51,10 @@ export default function Garment({
     },
   };
 
-  const [masonry, setMasonry] = useState(true);
   const [randomHeight, setRandomHeight] = useState<string>("");
 
   useEffect(() => {
     setRandomHeight(Math.random() * 200 + 300 + "px");
-
   }, []);
 
   const [garmentHovered, setGarmentHovered] = useState(false);
@@ -58,8 +62,11 @@ export default function Garment({
   const [saved, setSaved] = useState(false);
   const router = useTransitionRouter();
 
+  const anchorRef = React.useRef(null);
+
   return (
-    <a // double and single click
+    <motion.a
+      ref={anchorRef}
       className="w-fit h-fit"
       onClick={(e) => {
         if (!garmentActive) {
@@ -70,28 +77,43 @@ export default function Garment({
             setGarmentFocused(false);
           });
           const interval = setInterval(() => {
+            const height = anchorRef.current?.offsetHeight;
+            setGarmentHeight(height);
             setModalOpened(true);
             setModalGarment(garment);
+            setModalGarmentIndex(garmentIndex);
             clearInterval(interval);
           }, 275);
-        }}
-      }
-        tabIndex={!garmentActive ? garmentIndex + 3 : undefined}
-        onFocus={() => {
-          if (!garmentActive) {setGarmentFocused(true);}
-        }}
-        onBlur={() => {
-          if (!garmentActive) {setGarmentFocused(false);}
-        }}
+        }
+      }}
+      tabIndex={!garmentActive ? garmentIndex + 3 : undefined}
+      onFocus={() => {
+        if (!garmentActive) {
+          setGarmentFocused(true);
+        }
+      }}
+      onBlur={() => {
+        if (!garmentActive) {
+          setGarmentFocused(false);
+        }
+      }}
+      layoutDependency={modalGarment}
+      layoutId={modalGarment === garment && `garment-${garment._id}`}
+      transition={{ duration: 1 }}
     >
       <motion.div
         {...anim(garmentEnter)}
+        transition={{ duration: 1 }}
         className="bg-white w-full flex h-fit relative"
         onMouseEnter={() => {
-          if (!garmentActive) {setGarmentHovered(true);}
+          if (!garmentActive) {
+            setGarmentHovered(true);
+          }
         }}
         onMouseLeave={() => {
-          if (!garmentActive) {setGarmentHovered(false);}
+          if (!garmentActive) {
+            setGarmentHovered(false);
+          }
         }}
       >
         <AnimatePresence mode="wait">
@@ -102,7 +124,10 @@ export default function Garment({
             >
               {saved && (
                 <motion.div
-                  onMouseMove={(e) => {const posX = e.clientX; const posY = e.clientY}}
+                  onMouseMove={(e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                  }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -125,11 +150,11 @@ export default function Garment({
           className="w-full"
           src={garment.image.src}
           alt={garment.image.alt}
-          loading='lazy'
+          loading="lazy"
           width={200}
           height={200}
         />
       </motion.div>
-    </a>
+    </motion.a>
   );
 }

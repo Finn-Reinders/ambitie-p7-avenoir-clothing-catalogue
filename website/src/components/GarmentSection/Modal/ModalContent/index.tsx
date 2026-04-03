@@ -1,11 +1,12 @@
 "use client";
 import Garment from "../../Garment";
 
-export default function ModalContent({ garments, openedGarment }) {
+export default function ModalContent({ garments, openedGarment, modalGarmentIndex }) {
+  console.log(modalGarmentIndex);
   if (openedGarment) {
     return (
       <div className='w-122 h-fit'>
-        {<Garment garmentActive={true} garment={openedGarment} delay={0} />}
+        {<Garment garmentActive={true} key={`garment-${modalGarmentIndex}`} garment={openedGarment} delay={0} />}
       </div>
     );
   }

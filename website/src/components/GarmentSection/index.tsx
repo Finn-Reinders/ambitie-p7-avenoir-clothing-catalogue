@@ -6,13 +6,14 @@ import { Garment as GarmentType } from "../../modules/garmentsData";
 import { AnimatePresence, easeIn, motion } from "framer-motion";
 import Modal from "./Modal";
 import ModalContent from "./Modal/ModalContent";
+import Footer from "../Footer";
 interface GarmentSectionProps {
   garments?: GarmentType[];
 }
 
 export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
   const masonry: boolean = true;
-  const [columns, setColumns] = useState<number>(5);
+  const [columns, setColumns] = useState<number>(4);
   const [modalOpened, setModalOpened] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,6 +35,9 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
   const [modalGarment, setModalGarment] = React.useState<GarmentType | null>(
     null,
   );
+  const [modalGarmentIndex, setModalGarmentIndex] = React.useState(null);
+
+  const [garmentHeight, setGarmentHeight] = React.useState(null);
   return (
     <>
       <motion.main
@@ -53,20 +57,24 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
                     {garmentIndex % columns === columnIndex &&
                     modalGarment !== garment ? (
                       <Garment
+                        setModalGarmentIndex={setModalGarmentIndex}
                         garmentActive={false}
                         garmentIndex={garmentIndex}
                         setModalGarment={setModalGarment}
                         garment={garment}
-                        delay={0.1 * garmentIndex}
+                        delay={0}
+                        modalGarment={modalGarment}
                         modalOpened={modalOpened}
                         setModalOpened={setModalOpened}
+                        setGarmentHeight={setGarmentHeight}
                       />
-                    ) : (
-                      garmentIndex % columns === columnIndex &&
-                      modalGarment === garment && (
-                        <div className="h-100"></div>
-                      )
-                    )}
+                    ) : garmentIndex % columns === columnIndex &&
+                      modalGarment === garment ? (
+                      <div
+                        className="h-100 w-full"
+                        style={{ height: `${garmentHeight}px` }}
+                      ></div>
+                    ) : null}
                   </AnimatePresence>
                 );
               })}
@@ -74,8 +82,19 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
           );
         })}
       </motion.main>
-      <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
-        <ModalContent openedGarment={modalGarment} garments={garments} />
+      <Footer />
+      <Modal 
+        open={modalOpened} 
+        onClose={() => {
+          setModalOpened(false);
+          setModalGarment(null);
+        }}
+      >
+        <ModalContent
+          modalGarmentIndex={modalGarmentIndex}
+          openedGarment={modalGarment}
+          garments={garments}
+        />
       </Modal>
     </>
   );

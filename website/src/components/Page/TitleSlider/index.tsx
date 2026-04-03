@@ -16,13 +16,17 @@ export default function TitleSlider() {
 
   const titleVariants = {
     intial: {
-      y: '0%'
+      y: "0%",
     },
     enter: {
-      y: '-100%',
-      transition: {delay: 2, duration: 0.6, ease: cubicBezier(0.83, 0, 0.17, 1)}
-    }
-  }
+      y: "-100%",
+      transition: {
+        delay: 2,
+        duration: 0.6,
+        ease: cubicBezier(0.83, 0, 0.17, 1),
+      },
+    },
+  };
 
   const path = usePathname();
   const title = path.slice(1);
@@ -36,7 +40,7 @@ export default function TitleSlider() {
     <AnimatePresence mode="wait">
       {titleSlider && (
         <motion.div
-          className="absolute left-0 top-0 h-screen w-screen bg-lime-500 flex justify-center items-center z-100"
+          className="absolute left-0 top-0 h-screen w-screen bg-sky-500 flex justify-center items-center z-100"
           variants={sliderVariants}
           initial="enter"
           animate="enter"
@@ -45,7 +49,15 @@ export default function TitleSlider() {
             setTitleSlider(false);
           }}
         >
-          <h1 className='text-3xl overflow-hidden h-fit flex items-center leading-none uppercase'><motion.span variants={titleVariants} initial='initial' animate='enter'>{title ? title : 'home'}</motion.span></h1>
+          <h1 className='text-4xl font-["inter"] overflow-hidden h-fit flex items-center leading-none uppercase'>
+            <motion.span
+              variants={titleVariants}
+              initial="initial"
+              animate="enter"
+            >
+              {title ? title : "home"}
+            </motion.span>
+          </h1>
         </motion.div>
       )}
     </AnimatePresence>

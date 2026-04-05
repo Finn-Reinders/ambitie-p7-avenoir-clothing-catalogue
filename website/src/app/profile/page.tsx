@@ -21,7 +21,6 @@ export default async function page() {
             <SignOut />
           </div>
         )}
-        <p>Profile</p>
       </div>
     </Page>
   );

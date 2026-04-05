@@ -31,7 +31,7 @@ export default function Navbar() {
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
-    <nav className="bg-lime-500 fixed top-0">
+    <nav className="bg-lime-500 fixed top-0 right-0">
       <ul className="flex gap-4">
         {routes.map((route, i) => {
           const isActive = pathname === route.url;

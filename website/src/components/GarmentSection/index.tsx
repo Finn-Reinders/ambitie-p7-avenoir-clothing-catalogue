@@ -7,6 +7,7 @@ import { AnimatePresence, easeIn, motion } from "framer-motion";
 import Modal from "./Modal";
 import ModalContent from "./Modal/ModalContent";
 import Footer from "../Footer";
+import Lenis from "lenis";
 interface GarmentSectionProps {
   garments?: GarmentType[];
 }
@@ -38,6 +39,10 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
   const [modalGarmentIndex, setModalGarmentIndex] = React.useState(null);
 
   const [garmentHeight, setGarmentHeight] = React.useState(null);
+
+  useEffect(() => {
+  }, [])
+
   return (
     <>
       <motion.main

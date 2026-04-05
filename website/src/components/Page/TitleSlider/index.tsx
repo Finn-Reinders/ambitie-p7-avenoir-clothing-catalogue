@@ -1,10 +1,11 @@
 "use client";
 import { AnimatePresence, motion, cubicBezier } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 export default function TitleSlider() {
-  const [titleSlider, setTitleSlider] = useState(true);
+  const [titleSlider, setTitleSlider] = useState(false);
+  const isInitialMount = useRef(true);
 
   const sliderVariants = {
     enter: { clipPath: "inset(0%)" },
@@ -28,28 +29,53 @@ export default function TitleSlider() {
     },
   };
 
+  const h1Variants = {
+    initial: {
+      scale: 1,
+      filter: 'blur(0px)'
+    },
+    enter: {
+      scale: 1.2,
+      filter: 'blur(3px)',
+      transition: { duration: 0.6, delay: 2, ease: cubicBezier(0.83, 0, 0.17, 1)}
+    }
+  }
+
   const path = usePathname();
   const title = path.slice(1);
 
   useEffect(() => {
-    setTimeout(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    setTitleSlider(true);
+    document.documentElement.style.overflowY = "hidden";
+    document.body.style.overflowY = "hidden";
+    const timer = setTimeout(() => {
       setTitleSlider(false);
+      document.documentElement.style.overflowY = "auto";
+      document.body.style.overflowY = "auto";
     }, 2000);
-  }, []);
+
+    return () => {
+      clearTimeout(timer);
+      document.documentElement.style.overflowY = "auto";
+      document.body.style.overflowY = "auto";
+    };
+  }, [path]);
   return (
     <AnimatePresence mode="wait">
       {titleSlider && (
         <motion.div
-          className="absolute left-0 top-0 h-screen w-screen bg-sky-500 flex justify-center items-center z-100"
+          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-100"
           variants={sliderVariants}
           initial="enter"
           animate="enter"
           exit="exit"
-          onClick={() => {
-            setTitleSlider(false);
-          }}
         >
-          <h1 className='text-4xl font-["inter"] overflow-hidden h-fit flex items-center leading-none uppercase'>
+          <motion.h1 variants={h1Variants} initial='initial' animate='enter'   className="text-4xl overflow-hidden h-fit flex items-center font-['Satoshi-Italic'] leading-none uppercase">
             <motion.span
               variants={titleVariants}
               initial="initial"
@@ -57,7 +83,7 @@ export default function TitleSlider() {
             >
               {title ? title : "home"}
             </motion.span>
-          </h1>
+          </motion.h1>
         </motion.div>
       )}
     </AnimatePresence>

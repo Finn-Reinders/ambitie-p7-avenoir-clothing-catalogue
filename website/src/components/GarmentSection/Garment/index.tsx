@@ -36,7 +36,7 @@ export default function Garment({
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
-    // exit: { opacity: 0, y: -20 },
+    exit: { clipPath: 'inset(50%)', y: 20 },
   };
 
   const garmentHover = {
@@ -63,7 +63,6 @@ export default function Garment({
   const router = useTransitionRouter();
 
   const anchorRef = React.useRef(null);
-
   return (
     <motion.a
       ref={anchorRef}
@@ -97,9 +96,6 @@ export default function Garment({
           setGarmentFocused(false);
         }
       }}
-      layoutDependency={modalGarment}
-      layoutId={modalGarment === garment && `garment-${garment._id}`}
-      transition={{ duration: 1 }}
     >
       <motion.div
         {...anim(garmentEnter)}

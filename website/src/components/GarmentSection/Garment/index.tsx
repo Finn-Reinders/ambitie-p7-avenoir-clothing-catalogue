@@ -36,7 +36,7 @@ export default function Garment({
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
-    exit: { clipPath: 'inset(50%)', y: 20 },
+    exit: { y: 20 },
   };
 
   const garmentHover = {

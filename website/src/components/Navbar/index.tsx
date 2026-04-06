@@ -2,10 +2,13 @@
 import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 
 interface Route {
   url: string;
   name: string;
+  image: string;
 }
 
 export default function Navbar() {
@@ -13,48 +16,116 @@ export default function Navbar() {
     {
       url: "/",
       name: "Home",
+      image: "/placeholder-images/blue-hoodie",
     },
     {
-      url: "/garment",
-      name: "Garments",
+      url: "/explore",
+      name: "Explore",
+      image: "",
     },
     {
       url: "/profile",
       name: "Profile",
+      image: "",
     },
     {
       url: "/board",
       name: "My Board",
+      image: "",
     },
   ];
 
+  const [navOpen, setNavOpen] = useState(false);
+  const [routeHovered, setRouteHovered] = useState(false);
+
+  useEffect(() => {
+    if (navOpen) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "auto";
+    }
+  }, [navOpen]);
+
   const router = useTransitionRouter();
   const pathname = usePathname();
+
+  const variants = {
+    initial: { clipPath: "inset(0% 25% 100% 25%)" },
+    enter: {
+      clipPath: "inset(0%)",
+      transition: { duration: 0.8, ease: cubicBezier(0.83, 0, 0.17, 1) },
+    },
+    exit: {
+      clipPath: "inset(100% 25% 0% 25%)",
+      transition: { duration: 0.8, ease: cubicBezier(0.83, 0, 0.17, 1) },
+    },
+  };
+  const [buttonDelay, setButtonDelay] = useState(null);
   return (
-    <nav className="bg-lime-500 fixed top-0 right-0">
-      <ul className="flex gap-4">
-        {routes.map((route, i) => {
-          const isActive = pathname === route.url;
-          return (
-            <li key={`route${i}`}>
-              <Link
-                href={route.url}
-                onClick={(e) => {
-                  if (!isActive) {
-                    e.preventDefault();
-                    router.push(route.url, {
-                      onTransitionReady: pageAnimation,
-                    });
+    <AnimatePresence>
+      <button
+        className="fixed w-20 h-20 bg-lime-500 top-0 right-0 z-101"
+        onClick={() => {
+          if (!buttonDelay) {
+            setNavOpen(!navOpen);
+            setButtonDelay(true);
+            setTimeout(() => {
+              setButtonDelay(false);
+            }, 700);
+          }
+        }}
+      >
+        m
+      </button>
+      {navOpen && (
+        <motion.nav
+          key="fullnav"
+          className="fixed top-0 left-0 w-screen h-screen bg-gray-300 z-100"
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          <ul className="flex flex-col font-['Satoshi-Italic'] justify-center h-full gap-4 text-3xl w-fit mx-auto">
+            {routes.map((route, i) => {
+              const isActive = pathname === route.url;
+              return (
+                <motion.li
+                  className="w-fit relative"
+                  style={
+                    isActive
+                      ? {
+                          marginLeft: (window.innerWidth / routes.length) * i, fontFamily: "Satoshi-MediumItalic", 
+                        }
+                      : { marginLeft: (window.innerWidth / routes.length) * i, opacity: .7 }
                   }
-                }}
-              >
-                {route.name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+                  key={`route${i}`}
+                >
+                  <Link
+                    href={route.url}
+                    onClick={(e) => {
+                      if (!isActive) {
+                        e.preventDefault();
+                        router.push(route.url, {
+                          onTransitionReady: pageAnimation,
+                        });
+                      }
+                    }}
+                  >
+                    <p>
+                      {route.name}
+                      <span className="text-xs absolute right-0 top-0 translate-[-50%]">
+                        {i + 1}
+                      </span>
+                    </p>
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </ul>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }
 

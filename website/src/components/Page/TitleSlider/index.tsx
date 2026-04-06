@@ -22,7 +22,7 @@ export default function TitleSlider() {
     enter: {
       y: "-100%",
       transition: {
-        delay: 2,
+        delay: 2.05,
         duration: 0.6,
         ease: cubicBezier(0.83, 0, 0.17, 1),
       },
@@ -32,14 +32,18 @@ export default function TitleSlider() {
   const h1Variants = {
     initial: {
       scale: 1,
-      filter: 'blur(0px)'
+      filter: "blur(0px)",
     },
     enter: {
       scale: 1.2,
-      filter: 'blur(3px)',
-      transition: { duration: 0.6, delay: 2, ease: cubicBezier(0.83, 0, 0.17, 1)}
-    }
-  }
+      filter: "blur(3px)",
+      transition: {
+        duration: 0.6,
+        delay: 2.05,
+        ease: cubicBezier(0.83, 0, 0.17, 1),
+      },
+    },
+  };
 
   const path = usePathname();
   const title = path.slice(1);
@@ -51,37 +55,45 @@ export default function TitleSlider() {
     }
 
     setTitleSlider(true);
-    document.documentElement.style.overflowY = "hidden";
-    document.body.style.overflowY = "hidden";
+
+    const preventScroll = (e) => e.preventDefault();
+    document.addEventListener("wheel", preventScroll, { passive: false });
+    document.addEventListener("touchmove", preventScroll, { passive: false });
+
     const timer = setTimeout(() => {
       setTitleSlider(false);
-      document.documentElement.style.overflowY = "auto";
-      document.body.style.overflowY = "auto";
+      document.removeEventListener("wheel", preventScroll);
+      document.removeEventListener("touchmove", preventScroll);
     }, 2000);
 
     return () => {
       clearTimeout(timer);
-      document.documentElement.style.overflowY = "auto";
-      document.body.style.overflowY = "auto";
+      document.removeEventListener("wheel", preventScroll);
+      document.removeEventListener("touchmove", preventScroll);
     };
   }, [path]);
   return (
     <AnimatePresence mode="wait">
       {titleSlider && (
         <motion.div
-          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-100"
+          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-102"
           variants={sliderVariants}
           initial="enter"
           animate="enter"
           exit="exit"
         >
-          <motion.h1 variants={h1Variants} initial='initial' animate='enter'   className="text-4xl overflow-hidden h-fit flex items-center font-['Satoshi-Italic'] leading-none uppercase">
+          <motion.h1
+            variants={h1Variants}
+            initial="initial"
+            animate="enter"
+            className="text-4xl overflow-hidden h-fit flex items-center font-['Satoshi-Italic'] leading-none uppercase"
+          >
             <motion.span
               variants={titleVariants}
               initial="initial"
               animate="enter"
             >
-              {title ? title : "home"}
+              {title ? title : "avenoir"}
             </motion.span>
           </motion.h1>
         </motion.div>

@@ -5,7 +5,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Login from "../../components/Login";
 import SignOut from "../../components/SignOut";
-
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: 'Profile description'
+}
 export default async function page() {
   const session = await getServerSession(authOptions);
 

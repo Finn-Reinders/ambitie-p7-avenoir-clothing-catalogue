@@ -38,10 +38,10 @@ export default function imageUpload() {
             <div className='w-screen h-screen text-white'>
                 <p>Image Upload</p>
                 <input type="file" accept="image/*" onChange={HandleChange}></input>
-            </div>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>
                 Upload Image
             </button>
+            </div>
         </Page>
     );
 }

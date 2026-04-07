@@ -3,7 +3,9 @@ import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { AnimatePresence, cubicBezier, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { routeEnter, variants } from './anim';
+import { anim } from '@/modules/anim';
 
 interface Route {
   url: string;
@@ -33,6 +35,11 @@ export default function Navbar() {
       name: "My Board",
       image: "",
     },
+    {
+      url: "/image-upload",
+      name: "Upload",
+      image: "",
+    },
   ];
 
   const [navOpen, setNavOpen] = useState(false);
@@ -49,17 +56,7 @@ export default function Navbar() {
   const router = useTransitionRouter();
   const pathname = usePathname();
 
-  const variants = {
-    initial: { clipPath: "inset(0% 25% 100% 25%)" },
-    enter: {
-      clipPath: "inset(0%)",
-      transition: { duration: 0.8, ease: cubicBezier(0.83, 0, 0.17, 1) },
-    },
-    exit: {
-      clipPath: "inset(100% 25% 0% 25%)",
-      transition: { duration: 0.8, ease: cubicBezier(0.83, 0, 0.17, 1) },
-    },
-  };
+  
   const [buttonDelay, setButtonDelay] = useState(null);
   return (
     <AnimatePresence>
@@ -71,7 +68,7 @@ export default function Navbar() {
             setButtonDelay(true);
             setTimeout(() => {
               setButtonDelay(false);
-            }, 700);
+            }, 800);
           }
         }}
       >
@@ -112,12 +109,12 @@ export default function Navbar() {
                       }
                     }}
                   >
-                    <p>
+                    <motion.p {...anim(routeEnter)}>
                       {route.name}
                       <span className="text-xs absolute right-0 top-0 translate-[-50%]">
                         {i + 1}
                       </span>
-                    </p>
+                    </motion.p>
                   </Link>
                 </motion.li>
               );

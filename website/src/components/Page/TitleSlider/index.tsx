@@ -72,6 +72,8 @@ export default function TitleSlider() {
       document.removeEventListener("touchmove", preventScroll);
     };
   }, [path]);
+
+  const finalTitle = title.replace('-', ' ')
   return (
     <AnimatePresence mode="wait">
       {titleSlider && (
@@ -93,7 +95,7 @@ export default function TitleSlider() {
               initial="initial"
               animate="enter"
             >
-              {title ? title : "avenoir"}
+             {finalTitle}
             </motion.span>
           </motion.h1>
         </motion.div>

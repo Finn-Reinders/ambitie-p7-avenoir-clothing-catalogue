@@ -95,7 +95,7 @@ export default function TitleSlider() {
               initial="initial"
               animate="enter"
             >
-             {finalTitle}
+             {finalTitle || 'Avenoir'}
             </motion.span>
           </motion.h1>
         </motion.div>

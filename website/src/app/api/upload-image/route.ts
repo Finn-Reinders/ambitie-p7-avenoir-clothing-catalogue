@@ -20,7 +20,7 @@ export async function POST (request: Request) {
                 image_url: uploadResult.secure_url,
                 public_id: uploadResult.public_id
             });
-            
+            // console.log("Uploadresult: ", uploadResult);
             await newImage.save();
         }
         return Response.json({ message: "Image uploaded successfully" }, {status: 200 });

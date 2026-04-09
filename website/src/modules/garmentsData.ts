@@ -44,9 +44,10 @@ export async function loadGarments(): Promise<Garment[]> {
       colour: doc.colour,
       label: doc.label,
       image: doc.image,
+      bytesize: doc.bytesize,
     })) as Garment[];
     
-    console.log("✅ Loaded garments from MongoDB:", plainGarments);
+    console.log("Loaded garments from MongoDB:", plainGarments);
     garmentData = plainGarments;
     return plainGarments;
   } catch (error) {

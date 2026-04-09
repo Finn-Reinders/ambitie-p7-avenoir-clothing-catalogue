@@ -36,7 +36,7 @@ export default function Garment({
   const garmentEnter = {
     initial: { opacity: 0, y: 20 },
     enter: { opacity: 1, y: 0, transition: { duration: 1, delay } },
-    exit: { y: 20 },
+    exit: { opacity: 0, y: 20 },
   };
 
   const garmentHover = {
@@ -66,7 +66,7 @@ export default function Garment({
   return (
     <motion.a
       ref={anchorRef}
-      className="w-fit h-fit"
+      className="w-full h-fit"
       onClick={(e) => {
         if (!garmentActive) {
           e.preventDefault();
@@ -100,7 +100,7 @@ export default function Garment({
       <motion.div
         {...anim(garmentEnter)}
         transition={{ duration: 1 }}
-        className="bg-white w-full flex h-fit relative"
+        className="bg-white w-full flex h-full max-h-150 relative"
         onMouseEnter={() => {
           if (!garmentActive) {
             setGarmentHovered(true);
@@ -143,7 +143,7 @@ export default function Garment({
           )}
         </AnimatePresence>
         <Image
-          className="w-full"
+          className="w-full object-cover"
           src={garment.image.src}
           alt={garment.image.alt}
           loading="lazy"

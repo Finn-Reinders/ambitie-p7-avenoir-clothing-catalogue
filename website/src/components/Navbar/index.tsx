@@ -135,7 +135,6 @@ const pageAnimation = (): void => {
   let locationXNeg = randomString === "x" ? `${-randomNumber}vw` : "-112vw";
   let locationYNeg = randomString === "y" ? `${-randomNumber}vh` : "-112vh";
 
-  console.log(randomString);
   document.documentElement.animate(
     [
       {

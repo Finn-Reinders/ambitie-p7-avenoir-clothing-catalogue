@@ -36,7 +36,7 @@ export default function Navbar() {
       image: "",
     },
     {
-      url: "/image-upload",
+      url: "/add-garment",
       name: "Upload",
       image: "",
     },

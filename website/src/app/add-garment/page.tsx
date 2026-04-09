@@ -1,5 +1,6 @@
 "use client";
 
+import Page from "@/components/Page";
 import { useState } from "react";
 
 export default function AddGarmentPage() {
@@ -55,7 +56,9 @@ export default function AddGarmentPage() {
   };
 
   return (
-    <main>
+    <Page>
+      <div className='text-white h-full w-full'>
+        
       <h1>Add Garment</h1>
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "500px" }}>
         <input
@@ -64,41 +67,42 @@ export default function AddGarmentPage() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-        />
+          />
         <textarea
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
+          />
         <input
           type="text"
           placeholder="Type"
           value={type}
           onChange={(e) => setType(e.target.value)}
-        />
+          />
         <input
           type="text"
           placeholder="Colour"
           value={colour}
           onChange={(e) => setColour(e.target.value)}
-        />
+          />
         <input
           type="text"
           placeholder="Labels (comma-separated)"
           value={labels}
           onChange={(e) => setLabels(e.target.value)}
-        />
+          />
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files?.[0] || null)}
           required
-        />
+          />
         <button type="submit" disabled={loading} style={{ width: "100px", height: "40px" }}>
           {loading ? "Uploading..." : "Add Garment"}
         </button>
       </form>
       {message && <p>{message}</p>}
-    </main>
+          </div>
+    </Page>
   );
 }

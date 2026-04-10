@@ -5,9 +5,6 @@ import { usePathname } from "next/navigation";
 
 export default function TitleSlider() {
   const [titleSlider, setTitleSlider] = useState(false);
-  const isInitialMount = useRef(true);
-
-  console.log("TitleSlider component rendered, titleSlider:", titleSlider);
 
   const sliderVariants = {
     enter: { clipPath: "inset(0%)" },
@@ -50,18 +47,11 @@ export default function TitleSlider() {
   const path = usePathname();
   const title = path.slice(1);
 
-  console.log("Current path:", path);
-
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
 
-    console.log("TitleSlider triggered for path:", path);
     setTitleSlider(true);
 
-    const preventScroll = (e: Event) => e.preventDefault();
+    const preventScroll = (e) => e.preventDefault();
     document.addEventListener("wheel", preventScroll, { passive: false });
     document.addEventListener("touchmove", preventScroll, { passive: false });
 
@@ -83,7 +73,7 @@ export default function TitleSlider() {
     <AnimatePresence mode="wait">
       {titleSlider && (
         <motion.div
-          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-50"
+          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-102"
           variants={sliderVariants}
           initial="enter"
           animate="enter"

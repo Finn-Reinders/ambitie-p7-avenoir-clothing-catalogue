@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-  reactCompiler: false,
+  reactCompiler: true,
   images: {
     domains: ["res.cloudinary.com"],
   },

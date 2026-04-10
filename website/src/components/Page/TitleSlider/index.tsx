@@ -78,7 +78,7 @@ export default function TitleSlider() {
     <AnimatePresence mode="wait">
       {titleSlider && (
         <motion.div
-          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-102"
+          className="absolute left-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center z-50"
           variants={sliderVariants}
           initial="enter"
           animate="enter"

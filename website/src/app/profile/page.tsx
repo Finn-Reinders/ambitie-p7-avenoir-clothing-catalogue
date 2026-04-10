@@ -6,6 +6,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import Login from "../../components/Login";
 import SignOut from "../../components/SignOut";
 import type { Metadata } from 'next'
+import ExploreProfiles from "@/components/ExploreProfiles";
  
 export const metadata: Metadata = {
   title: 'Profile',
@@ -26,6 +27,7 @@ export default async function page() {
             <SignOut />
           </div>
         )}
+      <ExploreProfiles />
       </div>
     </Page>
   );

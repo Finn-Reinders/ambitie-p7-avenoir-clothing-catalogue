@@ -10,7 +10,7 @@ export default async function garment({ params }: Props) {
   
   const garments = await loadGarments();
   const foundGarment = garments.find((g) => g._id === garmentId);
-
+  
   return (
     <Page>
       {foundGarment ? (

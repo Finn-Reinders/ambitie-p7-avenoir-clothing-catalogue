@@ -13,6 +13,13 @@ export interface Garment {
   image: GarmentImage;
 }
 
+export interface Profile {
+  _id?: string;
+  name: string;
+  email: string;
+  image: string;
+}
+
 export const garment: Garment = {
   name: "Test",
   description: "",
@@ -27,7 +34,6 @@ export const garment: Garment = {
 
 export let garmentData: Garment[] = [garment];
 
-// Fetch garments from MongoDB directly
 export async function loadGarments(): Promise<Garment[]> {
   try {
     const clientPromise = await import("@/lib/mongodb").then(m => m.default);
@@ -57,4 +63,27 @@ export async function loadGarments(): Promise<Garment[]> {
 
 export default function uploadGarment(): void {
   garmentData.push(garment);
+}
+
+export async function loadProfiles(): Promise<Profile[]> {
+  try {
+    const clientPromise = await import("@/lib/mongodb").then(m => m.default);
+    const client = await clientPromise;
+    const db = client.db("avenoir-clothing-catalogue");
+    const profiles = await db.collection("users").find({}).toArray();
+    
+    // Convert MongoDB documents to plain objects
+    const plainProfiles = profiles.map(doc => ({
+      _id: doc._id?.toString(),
+      name: doc.name,
+      email: doc.email,
+      image: doc.image,
+      bytesize: doc.bytesize,
+    })) as Profile[];
+    
+    console.log("Loaded profiles from MongoDB:", plainProfiles);
+    return plainProfiles;
+  } catch (error) {
+    return [];
+  }
 }

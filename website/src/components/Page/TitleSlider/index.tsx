@@ -54,6 +54,7 @@ export default function TitleSlider() {
       return;
     }
 
+    console.log("TitleSlider triggered for path:", path);
     setTitleSlider(true);
 
     const preventScroll = (e: Event) => e.preventDefault();

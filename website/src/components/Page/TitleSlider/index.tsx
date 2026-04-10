@@ -56,7 +56,7 @@ export default function TitleSlider() {
 
     setTitleSlider(true);
 
-    const preventScroll = (e) => e.preventDefault();
+    const preventScroll = (e: Event) => e.preventDefault();
     document.addEventListener("wheel", preventScroll, { passive: false });
     document.addEventListener("touchmove", preventScroll, { passive: false });
 

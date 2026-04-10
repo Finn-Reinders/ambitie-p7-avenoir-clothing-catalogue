@@ -7,6 +7,8 @@ export default function TitleSlider() {
   const [titleSlider, setTitleSlider] = useState(false);
   const isInitialMount = useRef(true);
 
+  console.log("TitleSlider component rendered, titleSlider:", titleSlider);
+
   const sliderVariants = {
     enter: { clipPath: "inset(0%)" },
     exit: {
@@ -47,6 +49,8 @@ export default function TitleSlider() {
 
   const path = usePathname();
   const title = path.slice(1);
+
+  console.log("Current path:", path);
 
   useEffect(() => {
     if (isInitialMount.current) {

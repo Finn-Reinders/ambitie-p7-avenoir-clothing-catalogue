@@ -1,4 +1,5 @@
 import Page from "@/components/Page";
+import Profile from "@/components/Profile";
 import { loadProfiles } from "@/modules/garmentsData";
 
 interface Props {
@@ -8,14 +9,13 @@ interface Props {
 export default async function UserProfilePage({ params }: Props) {
   const { profile: profileId } = await params;
   const profiles = await loadProfiles();
-  const foundProfile = profiles.find(p => p._id ===  profileId);
+  const foundProfile = profiles.find((p) => p._id === profileId);
 
   return (
     <Page>
-      <div className="w-screen h-screen text-white"> {foundProfile.name}
-        <img src={foundProfile.image} alt="" />
+      <div className='w-screen h-screen'>
+        <Profile profile={foundProfile} />
       </div>
     </Page>
   );
 }
-

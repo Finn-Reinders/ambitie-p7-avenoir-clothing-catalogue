@@ -1,6 +1,4 @@
-import React from "react";
 import Page from "../../components/Page";
-import Navbar from "../../components/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Login from "../../components/Login";

@@ -5,8 +5,8 @@
 * Styling: Tailwind
 * Animations: Framer-motion
 * API: Next.js API routes
-* Database: Supabase
-* Authentication: NextAuth.js, Supabase Auth
+* Database: MongoDB
+* Authentication: NextAuth.js with the providers: [google Oauth and email Oauth] 
 * Deployment: Vercel
 * Detection and bg removal: TensorFlow
 
@@ -17,7 +17,7 @@
     * Loading states will be managed using React state.
 
 * Functional Requirement: Uploading new garments
-    * Users can upload images and garment data via a modal form (see `UploadModal.jsx`).
+    * Users can upload images and garment data via a modal form (see `UploadModal.tsx`).
     * Images are processed with TensorFlow for background removal before upload.
     * Data is validated on the client and server side before being stored in Supabase.
     * Optimistic UI updates will be used for a responsive experience.
@@ -42,8 +42,8 @@
     * `garmentsData.js`: Handles data fetching and transformation from Supabase.
 
 * External References:
-    * Supabase: Table structure includes garments (id, name, image_url, description, category, created_at, user_id).
-    * Next.js API routes: `/api/garments` for CRUD operations.
+    * MongoDB: Table structure includes garments (id, name, image_url, description, category, created_at, user_id).
+    * Next.js API routes: `/api/garments`
     * TensorFlow.js: Used for client-side image background removal.
 
 * Optimization Strategies:

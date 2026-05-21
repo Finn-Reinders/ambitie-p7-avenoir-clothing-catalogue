@@ -13,9 +13,7 @@ export default async function garmentPage() {
   const garments = await loadGarments();
   return (
     <Page>
-      <div className="h-fit w-screen">
         <GarmentSection garments={garments} />
-      </div>
     </Page>
   );
 }

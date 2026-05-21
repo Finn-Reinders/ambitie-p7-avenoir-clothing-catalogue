@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { anim } from "../../../modules/anim";
 import Image from "next/image";
-import Link from "next/link";
 import type { Garment as GarmentType } from "../../../modules/garmentsData";
 import { useTransitionRouter } from "next-view-transitions";
 import "./index.css";
+import Link from "next/link";
 
 interface GarmentProps {
   delay: number;
@@ -26,7 +26,7 @@ export default function Garment({
   garment,
   garmentIndex,
   modalOpened,
-  setModalOpened,
+  // setModalOpened,
   modalGarment,
   setModalGarment,
   garmentActive,
@@ -51,12 +51,6 @@ export default function Garment({
     },
   };
 
-  const [randomHeight, setRandomHeight] = useState<string>("");
-
-  useEffect(() => {
-    setRandomHeight(Math.random() * 200 + 300 + "px");
-  }, []);
-
   const [garmentHovered, setGarmentHovered] = useState(false);
   const [garmentFocused, setGarmentFocused] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -64,28 +58,29 @@ export default function Garment({
 
   const anchorRef = React.useRef(null);
   return (
-    <motion.a
+    <Link
+    href={`/explore/${garment._id}`}
       ref={anchorRef}
       className="w-full h-fit"
-      onClick={(e) => {
-        if (!garmentActive) {
-          e.preventDefault();
-          addEventListener("dblclick", (e) => {
-            clearInterval(interval);
-            setSaved(!saved);
-            setGarmentFocused(false);
-          });
-          const interval = setInterval(() => {
-            const height = anchorRef.current?.offsetHeight;
-            setGarmentHeight(height);
-            setModalOpened(true);
-            setModalGarment(garment);
-            setModalGarmentIndex(garmentIndex);
-            clearInterval(interval);
-          }, 275);
-        }
-      }}
-      tabIndex={!garmentActive ? garmentIndex + 3 : undefined}
+      // onClick={(e) => {
+      //   if (!garmentActive) {
+      //     e.preventDefault();
+      //     addEventListener("dblclick", () => {
+      //       clearTimeout(timeout);
+      //       setSaved(!saved);
+      //       setGarmentFocused(false);
+      //     });
+      //     const timeout = setTimeout(() => {
+      //       const height = anchorRef.current?.offsetHeight;
+      //       setGarmentHeight(height);
+      //       // setModalOpened(true);
+      //       setModalGarment(garment);
+      //       setModalGarmentIndex(garmentIndex);
+      //       clearTimeout(timeout);
+      //     }, 275);
+      //   }
+      // }}
+      tabIndex={!garmentActive ? garmentIndex + 1 : undefined}
       onFocus={() => {
         if (!garmentActive) {
           setGarmentFocused(true);
@@ -142,15 +137,13 @@ export default function Garment({
             </motion.div>
           )}
         </AnimatePresence>
-        <Image
+        <motion.img
           className="w-full object-cover"
+          layoutId={garment._id}
           src={garment.image.src}
           alt={garment.image.alt}
-          loading="lazy"
-          width={200}
-          height={200}
         />
       </motion.div>
-    </motion.a>
+    </Link>
   );
 }

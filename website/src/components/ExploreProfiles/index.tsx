@@ -6,7 +6,7 @@ import Profile from '../Profile';
 interface Profile {
   _id: string;
   name: string;
-  image: string;
+  image: string;  
   [key: string]: any;
 }
 

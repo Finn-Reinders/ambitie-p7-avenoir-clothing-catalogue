@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import ModalContent from "./Modal/ModalContent";
 import Footer from "../Footer";
 import Lenis from "lenis";
+import Link from "next/link";
 interface GarmentSectionProps {
   garments?: GarmentType[];
 }
@@ -40,17 +41,24 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
 
   const [garmentHeight, setGarmentHeight] = React.useState(null);
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <>
       <motion.main
-        className="flex justify-center w-full gap-1.5"
+        className="grid auto-rows-auto justify-center w-full gap-1.5"
         animate={{ x: modalOpened ? "50vw" : 0 }}
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       >
-        {[...Array(columns)].map((_, columnIndex) => {
+        {garments.map((garment, i) => {
+          return (
+            <Link href={`/explore/${garment._id}`} className='w-80 h-fit' key={`garment-${i}`}>
+              <motion.img className='w-full' layoutId={garment._id} src={garment.image.src} alt={garment.image.alt} />
+            </Link>
+          );
+        })}
+        </motion.main>
+        {/* {[...Array(columns)].map((_, columnIndex) => {
           return (
             <div
               key={`column-${columnIndex}`}
@@ -85,11 +93,10 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
               })}
             </div>
           );
-        })}
-      </motion.main>
-      <Footer />
-      <Modal 
-        open={modalOpened} 
+        })} */}
+      {/* <Footer /> */}
+      {/* <Modal
+        open={modalOpened}
         onClose={() => {
           setModalOpened(false);
           setModalGarment(null);
@@ -100,7 +107,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
           openedGarment={modalGarment}
           garments={garments}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 }

@@ -3,29 +3,29 @@
 import React, { useState, useEffect } from "react";
 import Garment from "./Garment/index";
 import { Garment as GarmentType } from "../../modules/garmentsData";
-import { AnimatePresence, easeIn, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Modal from "./Modal";
 import ModalContent from "./Modal/ModalContent";
 import Footer from "../Footer";
-import Lenis from "lenis";
+
 interface GarmentSectionProps {
   garments?: GarmentType[];
 }
 
 export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
-  const masonry: boolean = true;
   const [columns, setColumns] = useState<number>(4);
   const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const [displayedGarments, setDisplayedGarments] = useState<GarmentType[]>(garments);
+  const [modalGarment, setModalGarment] = React.useState<GarmentType | null>(null);
+  const [modalGarmentIndex, setModalGarmentIndex] = React.useState(null);
+  const [garmentHeight, setGarmentHeight] = React.useState(null);
 
   useEffect(() => {
     const columns = Math.max(1, Math.floor(window.innerWidth / (1080 / 3)));
     setColumns(columns);
 
     const handleResize = () => {
-      const newColumns = Math.max(
-        1,
-        Math.floor(window.innerWidth / (1080 / 3)),
-      );
+      const newColumns = Math.max(1, Math.floor(window.innerWidth / (1080 / 3)));
       setColumns(newColumns);
     };
 
@@ -33,15 +33,25 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [modalGarment, setModalGarment] = React.useState<GarmentType | null>(
-    null,
-  );
-  const [modalGarmentIndex, setModalGarmentIndex] = React.useState(null);
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      console.log("refreshing garments...");
+      try {
+        const response = await fetch("/api/garments", { cache: "no-store" });
+        if (!response.ok) throw new Error("Failed to refresh garments");
+        const data = await response.json();
+        setDisplayedGarments(data);
+      } catch (error) {
+        console.error("Error refreshing garments:", error);
+      }
+    }, 10000);
 
-  const [garmentHeight, setGarmentHeight] = React.useState(null);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
-  }, [])
+    setDisplayedGarments(garments);
+  }, [garments]);
 
   return (
     <>
@@ -56,7 +66,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
               key={`column-${columnIndex}`}
               className="flex flex-col w-75 gap-1.5"
             >
-              {garments.map((garment, garmentIndex) => {
+              {displayedGarments.map((garment, garmentIndex) => {
                 return (
                   <AnimatePresence mode="wait" key={garment._id}>
                     {garmentIndex % columns === columnIndex &&
@@ -88,8 +98,8 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
         })}
       </motion.main>
       <Footer />
-      <Modal 
-        open={modalOpened} 
+      <Modal
+        open={modalOpened}
         onClose={() => {
           setModalOpened(false);
           setModalGarment(null);
@@ -98,7 +108,7 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
         <ModalContent
           modalGarmentIndex={modalGarmentIndex}
           openedGarment={modalGarment}
-          garments={garments}
+          garments={displayedGarments}
         />
       </Modal>
     </>

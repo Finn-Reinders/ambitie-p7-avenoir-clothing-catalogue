@@ -24,7 +24,7 @@ export default function imageUpload() {
     const fetchImages = async () => {
         setLoading(true);
         try {
-            const response = await fetch("/api/images");
+            const response = await fetch("/api/garments");
             if (!response.ok) {
                 throw new Error("Failed to fetch images");
             }

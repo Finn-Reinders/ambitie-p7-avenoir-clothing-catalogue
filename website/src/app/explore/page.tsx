@@ -13,7 +13,7 @@ export default async function garmentPage() {
   const garments = await loadGarments();
   return (
     <Page>
-        <GarmentSection garments={garments} />
+        <GarmentSection  garments={garments} />
     </Page>
   );
 }

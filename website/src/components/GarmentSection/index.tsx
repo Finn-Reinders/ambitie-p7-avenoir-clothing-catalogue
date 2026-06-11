@@ -50,9 +50,6 @@ export default function GarmentSection({ garments = [] }: GarmentSectionProps) {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-  }, [])
-
   return (
     <>
       <motion.main

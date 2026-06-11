@@ -15,17 +15,19 @@ export default async function ExploreProfiles() {
   const db = client.db("avenoir-clothing-catalogue");
   const profiles = await db.collection("users").find({}).toArray() as unknown as Profile[];
 
-  // Convert MongoDB objects to plain objects for Client Components
   const serializedProfiles = profiles.map(profile => ({
     ...profile,
     _id: profile._id.toString(),
   }));
 
   return (
-    <div className=''>
+    <>
+    <h2>Suggested Profiles</h2>
+    <div className='flex gap-4'>
       {serializedProfiles.map(profile => (
         <Profile key={profile._id} profile={profile} />
       ))}
     </div>
+      </>
   );
 }

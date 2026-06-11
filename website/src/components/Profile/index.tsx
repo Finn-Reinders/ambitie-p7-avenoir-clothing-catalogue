@@ -8,21 +8,21 @@ export default function Profile({ profile }) {
   return (
     <Link
       href={`/profile/${profile._id}`}
-      className="flex bg-lime-500 w-fit"
+      className="flex w-30 h-30 flex-col  justify-center items-center rounded-md"
       onClick={() => {
         router.push(`/profile/${profile._id}`);
       }}
       key={profile._id}
     >
-      <h3>{profile.name}</h3>
-      <div className="h-20">
+      <div className="h-20 w-20">
         <motion.img
         layoutId={profile._id}
-          className="w-full h-full aspect-square"
+          className="w-full h-full aspect-square object-cover rounded-lg"
           src={profile.image}
           alt=""
         />
       </div>
+      <h3 className="text-white whitespace-norwrap">{profile.name}</h3>
     </Link>
   );
 }

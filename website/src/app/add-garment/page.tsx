@@ -57,7 +57,7 @@ export default function AddGarmentPage() {
 
   return (
     <Page>
-      <div className='text-white h-full w-full'>
+      <div className='text-white h-screen w-full'>
         
       <h1>Add Garment</h1>
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "500px" }}>

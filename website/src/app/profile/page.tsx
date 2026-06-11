@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 import ExploreProfiles from "@/components/ExploreProfiles";
  
 export const metadata: Metadata = {
-  title: 'Profile',
+  title: 'Avenoir - Profile',
   description: 'Profile description'
 }
 export default async function page() {
@@ -19,13 +19,18 @@ export default async function page() {
         {!session ? (
           <Login />
         ) : (
-          <div>
-            <p>{session.user?.name}</p>
-            {session.user?.image && <img src={session.user.image} alt="Profile" />}
+          <div className="flex flex-col">
+            <div className="flex bg-black gap-4 rounded-lg w-fit px-4 py-4">
+            {session.user?.image && <img className="rounded-full border-3 w-20 h-20 border-white" src={session.user.image} alt="Profile" />}
+            <div>
+
+            <p className="text-white">Welcome {session.user?.name}</p>
             <SignOut />
+            </div>
+              </div>
+            <ExploreProfiles />
           </div>
         )}
-      <ExploreProfiles />
       </div>
     </Page>
   );

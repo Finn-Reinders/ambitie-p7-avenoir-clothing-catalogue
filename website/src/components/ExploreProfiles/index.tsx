@@ -22,7 +22,7 @@ export default async function ExploreProfiles() {
 
   return (
     <>
-    <h2>Suggested Profiles</h2>
+    <h2 className='text-white pb-4 mt-8'>Suggested Profiles</h2>
     <div className='flex gap-4'>
       {serializedProfiles.map(profile => (
         <Profile key={profile._id} profile={profile} />

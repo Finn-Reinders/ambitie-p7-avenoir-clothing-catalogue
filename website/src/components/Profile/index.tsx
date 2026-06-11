@@ -8,7 +8,7 @@ export default function Profile({ profile }) {
   return (
     <Link
       href={`/profile/${profile._id}`}
-      className="flex w-30 h-30 flex-col  justify-center items-center rounded-md"
+      className="flex w-30 h-30 flex-col  justify-center items-center rounded-md text-ellipsis"
       onClick={() => {
         router.push(`/profile/${profile._id}`);
       }}
@@ -22,7 +22,7 @@ export default function Profile({ profile }) {
           alt=""
         />
       </div>
-      <h3 className="text-white whitespace-norwrap">{profile.name}</h3>
+      <h3 className="text-white whitespace-nowrap">{profile.name}</h3>
     </Link>
   );
 }

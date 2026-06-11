@@ -1,3 +1,4 @@
+import Link from "next/link";
 import GarmentSection from "../../components/GarmentSection/index";
 import Navbar from "../../components/Navbar/index";
 import Page from "../../components/Page/index";
@@ -13,6 +14,7 @@ export default async function garmentPage() {
   const garments = await loadGarments();
   return (
     <Page>
+      <Link href={`/add-garment`} >Upload Garment</Link>
         <GarmentSection  garments={garments} />
     </Page>
   );

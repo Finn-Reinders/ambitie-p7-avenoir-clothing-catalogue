@@ -14,7 +14,7 @@ export default async function garmentPage() {
   const garments = await loadGarments();
   return (
     <Page>
-      <Link href={`/add-garment`} >Upload Garment</Link>
+      <Link className="text-white" href={`/add-garment`} >Upload Garment</Link>
         <GarmentSection  garments={garments} />
     </Page>
   );

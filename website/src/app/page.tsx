@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <Page>
       <div className='w-screen'>
-        <h1 className="text-white text-7xl p-8">Welcome {session.user.name}</h1>
+        <h1 className="text-white text-7xl p-8">Welcome {session?.user.name}</h1>
   <h2 className="text-4xl text-white/70">explore your todays top picks</h2>
 <div className="grid grid-cols-3 gap-4 w-[50%] p-8">
   {garments.map((garment) => (

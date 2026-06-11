@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { Garment as GarmentInterface } from "@/modules/garmentsData";
-import { UploadImage } from "@/lib/upload-image";
 
 export async function GET() {
   try {
